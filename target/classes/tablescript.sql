@@ -74,20 +74,6 @@ insert into topic(creator_username, name, date_created) values("vichetmeng", "Fi
 
 insert into post(topic_id, username, title, content, date_posted) values(1,"vichetmeng", "post1 title", "post1 content", CURDATE());
 
-drop table comment;
-create table if not exists COMMENT (
-	id int primary key auto_increment,
-    parent_comment_id int,
-    post_id int not null,
-    username varchar(20),
-    content text not null,
-    date_added date not null,
-    num_of_upvotes int default 0,
-    num_of_downvotes int default 0,
-    constraint comment_parcomment_constraint foreign key (parent_comment_id) references comment(id),
-    constraint comment_post_constraint foreign key (post_id) references post(id),
-    constraint comment_user_constraint foreign key (username) references user(username)
-);
 
 insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "First comment's content by vichet", CURDATE());
 insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "second comment's content by vichet", CURDATE());
