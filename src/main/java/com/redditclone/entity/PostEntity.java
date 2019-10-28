@@ -18,9 +18,10 @@ public class PostEntity {
 	private String title;
 	private Integer upvoteCount;
 	private Integer downvoteCount;
+	private String pictureUrl;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "postpid")
-	private List<CommentEntity> commentEntity;
+	private List<CommentEntity> commentsList;
 	public Integer getPid() {
 		return pid;
 	}
