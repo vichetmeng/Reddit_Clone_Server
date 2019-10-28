@@ -1,8 +1,15 @@
 package com.redditclone.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +22,15 @@ public class UserEntity {
 	private String username;
 	@Column(name = "avatar")
 	private String avatarUrl;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="useruid")
+	private List<PostEntity> postList;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="user_upvoted",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
+	private List<PostEntity> postsUpvoted;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="user_downvoted",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
+	private List<PostEntity> postsDownvoted;
 	public Integer getUid() {
 		return uid;
 	}

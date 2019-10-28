@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `User`;
 
 
 CREATE TABLE Comment (
-  CId            int(10) NOT NULL AUTO_INCREMENT, 
+  CId            int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Content        text NOT NULL, 
   Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
   Downvote_Count int(10) DEFAULT 0 NOT NULL, 
@@ -39,12 +39,12 @@ CREATE TABLE User_Downvoted (
   PRIMARY KEY (PostPId, 
   UserUId));
 CREATE TABLE Picture (
-  PicId   int(10) NOT NULL AUTO_INCREMENT, 
+  PicId   int(10) NOT NULL DEFAULT 0 AUTO_INCREMENT, 
   pLink   varchar(255), 
   PostPId int(10) NOT NULL, 
   PRIMARY KEY (PicId));
 CREATE TABLE Post (
-  PId            int(10) DEFAULT 0 NOT NULL, 
+  PId            int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Content        text NOT NULL, 
   TopicId        int(10) NOT NULL, 
   UserUId        int(10) NOT NULL, 
@@ -64,7 +64,7 @@ CREATE TABLE SubRedditMonitor (
   PRIMARY KEY (MonitorUId, 
   TopicId));
 CREATE TABLE Topic (
-  TId         int(10) DEFAULT 0 NOT NULL, 
+  TId         int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Name        varchar(50) NOT NULL UNIQUE, 
   Rules       varchar(255), 
   Description text, 
@@ -76,7 +76,7 @@ CREATE TABLE User_Upvoted (
   PRIMARY KEY (PostPId, 
   UserUId));
 CREATE TABLE `User` (
-  UId           int(10) DEFAULT 0 NOT NULL, 
+  UId           int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Email         varchar(40) NOT NULL UNIQUE, 
   Password_Hash varchar(100) NOT NULL, 
   Username      varchar(50) NOT NULL UNIQUE, 
