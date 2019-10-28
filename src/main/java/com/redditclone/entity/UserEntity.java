@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class UserEntity {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer uid;
 	private String email;
 	private String passwordHash;
@@ -31,6 +34,9 @@ public class UserEntity {
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_downvoted",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
 	private List<PostEntity> postsDownvoted;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="user_save",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
+	private List<PostEntity> postsSaved;
 	public Integer getUid() {
 		return uid;
 	}
