@@ -1,90 +1,99 @@
-CREATE TABLE IF NOT exists USER (
-	username VARCHAR(20) primary KEY,
-    email VARCHAR(20) NOT NULL,
-    password VARCHAR(20) NOT NULL,
-    date_signed_up DATE NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS TOPIC (
-	id int primary key auto_increment,
-    creator_username varchar(10) not null,
-    name varchar(20) not null,
-    rule text,
-    description text,
-    date_created DATE NOT NULL,
-    constraint topic_creator_constraint foreign key(creator_username) references user(username)
-);
-
-CREATE TABLE IF NOT EXISTS POST (
-	id int primary key auto_increment,
-    topic_id int not null,
-    username varchar(20) not null,
-    title varchar(50) not null,
-    content text not null,
-    date_posted date not null,
-    num_of_upvotes int default 0,
-    num_of_downvotes int default 0,
-    constraint post_topic_constraint foreign key(topic_id) references topic(id),
-    constraint post_user_constraint foreign key (username) references user(username)
-);
-
-create table if not exists COMMENT (
-	id int primary key,
-    parent_comment_id int,
-    post_id int not null,
-    username varchar(20),
-    content text not null,
-    date_added date not null,
-    num_of_upvotes int default 0,
-    num_of_downvotes int default 0,
-    constraint comment_parcomment_constraint foreign key (parent_comment_id) references comment(id),
-    constraint comment_post_constraint foreign key (post_id) references post(id),
-    constraint comment_user_constraint foreign key (username) references user(username)
-);
-
-create table if not exists MODERATOR_TOPIC (
-	username varchar(20) not null,
-    topic_id int not null,
-    constraint moderator_pk_constraint primary key(username, topic_id)
-);
-create table if not exists USER_TOPIC (
-	username varchar(20) not null,
-    topic_id int not null,
-    constraint user_topic_pk_constraint primary key(username, topic_id)
-);
-
-create table if not exists user_post_upvote (
-	username varchar(20) not null,
-    post_id int not null,
-    constraint user_post_upvote_pk_constraint primary key(username, post_id)
-);
-
-create table if not exists user_post_downvote (
-	username varchar(20) not null,
-    post_id int not null,
-    constraint user_post_downvote_pk_constraint primary key(username, post_id)
-);
+ALTER TABLE `SubRedditMonitor	` DROP FOREIGN KEY FKSubRedditM356459;
+ALTER TABLE `SubRedditMonitor	` DROP FOREIGN KEY FKSubRedditM440551;
+ALTER TABLE SubRedditMember DROP FOREIGN KEY FKSubRedditM3641;
+ALTER TABLE SubRedditMember DROP FOREIGN KEY FKSubRedditM534752;
+ALTER TABLE Post DROP FOREIGN KEY FKPost964424;
+ALTER TABLE Post DROP FOREIGN KEY FKPost734962;
+ALTER TABLE Upvoted DROP FOREIGN KEY FKUpvoted706414;
+ALTER TABLE Upvoted DROP FOREIGN KEY FKUpvoted465360;
+ALTER TABLE Downvoted DROP FOREIGN KEY FKDownvoted958208;
+ALTER TABLE Downvoted DROP FOREIGN KEY FKDownvoted199263;
+ALTER TABLE Comment DROP FOREIGN KEY FKComment916862;
+ALTER TABLE Comment DROP FOREIGN KEY FKComment675808;
+ALTER TABLE Comment DROP FOREIGN KEY FKComment504122;
+ALTER TABLE Picture DROP FOREIGN KEY FKPicture58520;
+DROP TABLE IF EXISTS Comment;
+DROP TABLE IF EXISTS Downvoted;
+DROP TABLE IF EXISTS Picture;
+DROP TABLE IF EXISTS Post;
+DROP TABLE IF EXISTS SubRedditMember;
+DROP TABLE IF EXISTS SubRedditMonitor;
+DROP TABLE IF EXISTS Topic;
+DROP TABLE IF EXISTS Upvoted;
+DROP TABLE IF EXISTS `User`;
 
 
-
-insert into user(username, email, password, date_signed_up) Values("vichetmeng", "vichet@infosys.com", "123456", CURDATE());
-
-
-insert into topic(creator_username, name, date_created) values("vichetmeng", "FirstTopic", CURDATE());
-
-insert into post(topic_id, username, title, content, date_posted) values(1,"vichetmeng", "post1 title", "post1 content", CURDATE());
-
-
-insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "First comment's content by vichet", CURDATE());
-insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "second comment's content by vichet", CURDATE());
-insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "third comment's content by vichet", CURDATE());
-insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "fourth comment's content by vichet", CURDATE());
-insert into comment(post_id, username, content, date_added) values(1, "vichetmeng", "fifth comment's content by vichet", CURDATE());
-
-select * from user;
-select * from topic;
-select * from post;
-select * from comment;
-
-
-
+CREATE TABLE Comment (
+  CId            int(10) NOT NULL AUTO_INCREMENT, 
+  Content        text NOT NULL, 
+  Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
+  Downvote_Count int(10) DEFAULT 0 NOT NULL, 
+  PostPId        int(10) NOT NULL, 
+  UserUId        int(10) NOT NULL, 
+  ParentCId      int(10), 
+  PRIMARY KEY (CId), 
+  UNIQUE INDEX (CId));
+CREATE TABLE Downvoted (
+  PostPId int(10) NOT NULL, 
+  UserUId int(10) NOT NULL, 
+  PRIMARY KEY (PostPId, 
+  UserUId));
+CREATE TABLE Picture (
+  PicId   int(10) NOT NULL AUTO_INCREMENT, 
+  pLink   varchar(255), 
+  PostPId int(10) NOT NULL, 
+  PRIMARY KEY (PicId));
+CREATE TABLE Post (
+  PId            int(10) DEFAULT 0 NOT NULL, 
+  Content        text NOT NULL, 
+  TopicId        int(10) NOT NULL, 
+  UserUId        int(10) NOT NULL, 
+  Title          varchar(255) NOT NULL, 
+  Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
+  Downvote_Count int(10) DEFAULT 0 NOT NULL, 
+  PRIMARY KEY (PId), 
+  UNIQUE INDEX (PId));
+CREATE TABLE SubRedditMember (
+  MemberUId int(10) NOT NULL, 
+  TopicId   int(10) NOT NULL, 
+  PRIMARY KEY (MemberUId, 
+  TopicId));
+CREATE TABLE SubRedditMonitor (
+  MonitorUId int(10) NOT NULL, 
+  TopicId    int(10) NOT NULL, 
+  PRIMARY KEY (MonitorUId, 
+  TopicId));
+CREATE TABLE Topic (
+  TId         int(10) DEFAULT 0 NOT NULL, 
+  Name        varchar(50) NOT NULL UNIQUE, 
+  Rules       varchar(255), 
+  Description text, 
+  PRIMARY KEY (TId), 
+  UNIQUE INDEX (TId));
+CREATE TABLE Upvoted (
+  PostPId int(10) NOT NULL, 
+  UserUId int(10) NOT NULL, 
+  PRIMARY KEY (PostPId, 
+  UserUId));
+CREATE TABLE `User` (
+  UId           int(10) DEFAULT 0 NOT NULL, 
+  Email         varchar(40) NOT NULL UNIQUE, 
+  Password_Hash varchar(100) NOT NULL, 
+  Username      varchar(50) NOT NULL UNIQUE, 
+  Avatar        varchar(255), 
+  PRIMARY KEY (UId), 
+  UNIQUE INDEX (UId));
+ALTER TABLE `SubRedditMonitor	` ADD CONSTRAINT FKSubRedditM356459 FOREIGN KEY (MonitorUId) REFERENCES `User` (UId);
+ALTER TABLE `SubRedditMonitor	` ADD CONSTRAINT FKSubRedditM440551 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
+ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM3641 FOREIGN KEY (MemberUId) REFERENCES `User` (UId);
+ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM534752 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
+ALTER TABLE Post ADD CONSTRAINT FKPost964424 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
+ALTER TABLE Post ADD CONSTRAINT FKPost734962 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE Upvoted ADD CONSTRAINT FKUpvoted706414 FOREIGN KEY (PostPId) REFERENCES Post (PId);
+ALTER TABLE Upvoted ADD CONSTRAINT FKUpvoted465360 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE Downvoted ADD CONSTRAINT FKDownvoted958208 FOREIGN KEY (PostPId) REFERENCES Post (PId);
+ALTER TABLE Downvoted ADD CONSTRAINT FKDownvoted199263 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE Comment ADD CONSTRAINT FKComment916862 FOREIGN KEY (PostPId) REFERENCES Post (PId);
+ALTER TABLE Comment ADD CONSTRAINT FKComment675808 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE Comment ADD CONSTRAINT FKComment504122 FOREIGN KEY (ParentCId) REFERENCES Comment (CId);
+ALTER TABLE Picture ADD CONSTRAINT FKPicture58520 FOREIGN KEY (PostPId) REFERENCES Post (PId);
