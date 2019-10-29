@@ -1,5 +1,6 @@
 package com.redditclone.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,6 +30,7 @@ public class PostEntity {
 	@OneToMany(cascade = CascadeType.ALL )
 	@JoinColumn(name = "postpid")
 	private List<CommentEntity> commentsList;
+	private LocalDateTime dateCreated;
 	public Integer getPid() {
 		return pid;
 	}
@@ -77,5 +79,12 @@ public class PostEntity {
 	public void setCommentsList(List<CommentEntity> commentsList) {
 		this.commentsList = commentsList;
 	}
+	public LocalDateTime getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(LocalDateTime dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	
 	
 }

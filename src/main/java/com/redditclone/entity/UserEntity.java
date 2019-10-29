@@ -1,5 +1,6 @@
 package com.redditclone.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,6 +38,7 @@ public class UserEntity {
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_save",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
 	private List<PostEntity> postsSaved;
+	private LocalDateTime dateJoined;
 	public Integer getUid() {
 		return uid;
 	}
@@ -66,6 +68,36 @@ public class UserEntity {
 	}
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
+	}
+	public List<PostEntity> getPostList() {
+		return postList;
+	}
+	public void setPostList(List<PostEntity> postList) {
+		this.postList = postList;
+	}
+	public List<PostEntity> getPostsUpvoted() {
+		return postsUpvoted;
+	}
+	public void setPostsUpvoted(List<PostEntity> postsUpvoted) {
+		this.postsUpvoted = postsUpvoted;
+	}
+	public List<PostEntity> getPostsDownvoted() {
+		return postsDownvoted;
+	}
+	public void setPostsDownvoted(List<PostEntity> postsDownvoted) {
+		this.postsDownvoted = postsDownvoted;
+	}
+	public List<PostEntity> getPostsSaved() {
+		return postsSaved;
+	}
+	public void setPostsSaved(List<PostEntity> postsSaved) {
+		this.postsSaved = postsSaved;
+	}
+	public LocalDateTime getDateJoined() {
+		return dateJoined;
+	}
+	public void setDateJoined(LocalDateTime dateJoined) {
+		this.dateJoined = dateJoined;
 	}
 	
 	
