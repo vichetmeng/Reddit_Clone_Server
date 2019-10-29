@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +23,9 @@ public class PostEntity {
 	private Integer upvoteCount;
 	private Integer downvoteCount;
 	private String pictureUrl;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "useruid")
+	private UserEntity user;
 	@OneToMany(cascade = CascadeType.ALL )
 	@JoinColumn(name = "postpid")
 	private List<CommentEntity> commentsList;
@@ -55,6 +58,24 @@ public class PostEntity {
 	}
 	public void setDownvoteCount(Integer downvoteCount) {
 		this.downvoteCount = downvoteCount;
+	}
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+	public UserEntity getUser() {
+		return user;
+	}
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+	public List<CommentEntity> getCommentsList() {
+		return commentsList;
+	}
+	public void setCommentsList(List<CommentEntity> commentsList) {
+		this.commentsList = commentsList;
 	}
 	
 }
