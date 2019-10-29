@@ -3,6 +3,8 @@ package com.redditclone.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.redditclone.entity.UserEntity;
+
 public class User {
 	private Integer uid;
 	private String email;
@@ -15,6 +17,9 @@ public class User {
 	private List<Post> postsSaved;
 	private List<Topic> topicList;
 	private LocalDateTime dateJoined;
+	
+	
+	
 	public Integer getUid() {
 		return uid;
 	}

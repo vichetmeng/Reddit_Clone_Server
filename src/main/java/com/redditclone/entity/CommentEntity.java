@@ -38,6 +38,8 @@ public class CommentEntity {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="useruid")
 	private UserEntity user;
+	
+	
 
 	public Integer getCid() {
 		return cid;

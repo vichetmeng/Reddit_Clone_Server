@@ -10,6 +10,7 @@ public class Comment {
 	private LocalDateTime dateCreated;
 	private Comment parentComment;
 	private User user;
+	
 	public Integer getCid() {
 		return cid;
 	}
