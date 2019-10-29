@@ -28,7 +28,9 @@ public class UserDAOImpl implements UserDAO {
 	public Integer login(String username, String password) {
 		// TODO Auto-generated method stub
 
-		User u = new User(); 
+		
+		
+		User mydefaulusername = new User(); 
 		return null;
 	}
 
