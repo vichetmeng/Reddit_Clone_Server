@@ -12,7 +12,6 @@ import com.redditclone.entity.UserEntity;
 import com.redditclone.model.Post;
 import com.redditclone.utility.HashingUtility;
 
-
 @Repository
 public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
