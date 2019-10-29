@@ -151,6 +151,7 @@ INSERT INTO post(title,content,topicid, useruid, date_created) values("Programmi
 
 
 select * from user;
+select * from post;
 
 
 
