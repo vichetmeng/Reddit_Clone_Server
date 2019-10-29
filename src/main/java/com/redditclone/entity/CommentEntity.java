@@ -1,6 +1,7 @@
 package com.redditclone.entity;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ public class CommentEntity {
 	@Column(name="downvote_count")
 	private Integer downvoteCount;
 	@Column(name = "date_created")
-	private LocalDate dateCreated;
+	private LocalDateTime dateCreated;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="parentcid")
@@ -69,11 +70,11 @@ public class CommentEntity {
 		this.downvoteCount = downvoteCount;
 	}
 
-	public LocalDate getDateCreated() {
+	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(LocalDate dateCreated) {
+	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
@@ -83,6 +84,14 @@ public class CommentEntity {
 
 	public void setParentComment(CommentEntity parentComment) {
 		this.parentComment = parentComment;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 	
 }

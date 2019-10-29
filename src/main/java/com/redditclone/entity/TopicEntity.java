@@ -24,7 +24,7 @@ public class TopicEntity {
 	private String description;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="pid")
+	@JoinColumn(name="topicid")
 	private List<PostEntity> postlist;
 
 	@ManyToMany(cascade=CascadeType.ALL)
@@ -32,6 +32,16 @@ public class TopicEntity {
 	inverseJoinColumns = @JoinColumn(name="useruid"))
 	private List<UserEntity> userBlacklist;
 
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="subredditmember", joinColumns=@JoinColumn(name="topicid"), 
+	inverseJoinColumns = @JoinColumn(name="useruid"))
+	private List<UserEntity> memberList;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="subredditmember", joinColumns=@JoinColumn(name="topicid"), 
+	inverseJoinColumns = @JoinColumn(name="useruid"))
+	private List<UserEntity> monitorList;
+	
 	public Integer getTid() {
 		return tid;
 	}
@@ -78,6 +88,22 @@ public class TopicEntity {
 
 	public void setUserBlacklist(List<UserEntity> userBlacklist) {
 		this.userBlacklist = userBlacklist;
+	}
+
+	public List<UserEntity> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<UserEntity> memberList) {
+		this.memberList = memberList;
+	}
+
+	public List<UserEntity> getMonitorList() {
+		return monitorList;
+	}
+
+	public void setMonitorList(List<UserEntity> monitorList) {
+		this.monitorList = monitorList;
 	} 
 	
 }
