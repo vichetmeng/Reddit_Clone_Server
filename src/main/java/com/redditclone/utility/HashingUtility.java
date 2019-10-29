@@ -4,8 +4,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HashingUtility {
-	public static String getHashValue(String data) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+	public static String getHashValue(String data) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			return null;
+		}
 		
 		md.update(data.getBytes());
 		
