@@ -27,6 +27,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public Integer login(String username, String password) {
 		// TODO Auto-generated method stub
+		User user = new User();
 		return null;
 	}
 
