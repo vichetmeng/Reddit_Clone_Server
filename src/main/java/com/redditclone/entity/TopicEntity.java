@@ -1,5 +1,6 @@
 package com.redditclone.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,6 +42,8 @@ public class TopicEntity {
 	@JoinTable(name="subredditmember", joinColumns=@JoinColumn(name="topicid"), 
 	inverseJoinColumns = @JoinColumn(name="useruid"))
 	private List<UserEntity> monitorList;
+	
+	private LocalDateTime dateCreated;
 	
 	public Integer getTid() {
 		return tid;
@@ -104,6 +107,14 @@ public class TopicEntity {
 
 	public void setMonitorList(List<UserEntity> monitorList) {
 		this.monitorList = monitorList;
+	}
+
+	public LocalDateTime getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(LocalDateTime dateCreated) {
+		this.dateCreated = dateCreated;
 	} 
 	
 }
