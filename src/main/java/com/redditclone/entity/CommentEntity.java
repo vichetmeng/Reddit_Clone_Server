@@ -23,10 +23,13 @@ public class CommentEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer cid; 
 	private String content; 
+	
 	@Column(name="upvote_count")
 	private Integer upvoteCount;
+	
 	@Column(name="downvote_count")
 	private Integer downvoteCount;
+	
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
 	

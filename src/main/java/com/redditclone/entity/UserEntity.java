@@ -38,6 +38,9 @@ public class UserEntity {
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_save",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
 	private List<PostEntity> postsSaved;
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="subredditmember",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="topicid"))
+	private List<TopicEntity> topicList;
 	private LocalDateTime dateJoined;
 	public Integer getUid() {
 		return uid;
@@ -98,6 +101,12 @@ public class UserEntity {
 	}
 	public void setDateJoined(LocalDateTime dateJoined) {
 		this.dateJoined = dateJoined;
+	}
+	public List<TopicEntity> getTopicList() {
+		return topicList;
+	}
+	public void setTopicList(List<TopicEntity> topicList) {
+		this.topicList = topicList;
 	}
 	
 	
