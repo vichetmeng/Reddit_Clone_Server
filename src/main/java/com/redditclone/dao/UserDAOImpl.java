@@ -28,10 +28,7 @@ public class UserDAOImpl implements UserDAO {
 	public Integer login(String username, String password) {
 		// TODO Auto-generated method stub
 
-		
-		
-		
-		User u = new User(); 
+		User user = new User(); 
 		return null;
 	}
 
@@ -53,7 +50,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Post> getDownvotedPosts(Integer uid) {
-		// TODO Auto-generated method stub
+		Post p = new Post();
 		return null;
 	}
 
