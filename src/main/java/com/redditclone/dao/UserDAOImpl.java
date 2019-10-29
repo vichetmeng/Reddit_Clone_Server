@@ -1,6 +1,6 @@
 package com.redditclone.dao;
 
-import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.redditclone.entity.UserEntity;
 import com.redditclone.model.Post;
+import com.redditclone.model.User;
 import com.redditclone.utility.HashingUtility;
 
 
@@ -19,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
 	EntityManager entityManager;
 
 	@Override
-	public UserEntity getUser(Integer uid) {
+	public User getUser(Integer uid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,16 +32,18 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Integer register(String username, String password) {
+	public Integer register(User user) {
 		UserEntity ue = new UserEntity();
-		ue.setUsername(username);
-		ue.setPasswordHash(HashingUtility.getHashValue(password));
-		return null;
+		ue.setUsername(user.getUsername());
+		ue.setPasswordHash(HashingUtility.getHashValue(user.getPassword()));
+		ue.setDateJoined(LocalDateTime.now());
+		ue.setEmail(user.getEmail());
+		entityManager.persist(ue);
+		return ue.getUid();
 	}
-
+	
 	@Override
 	public List<Post> getUpvotedPosts(Integer uid) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -55,5 +58,4 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

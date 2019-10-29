@@ -47,7 +47,7 @@ CREATE TABLE Post (
   title			 varchar(255) not null,
   Content        text NOT NULL,
   TopicId        int(10) NOT NULL, 
-  UserUId        int(10), 
+  UserUId        int(10) NOT NULL, 
   picture_url    varchar(255), 
   Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
   Downvote_Count int(10) DEFAULT 0 NOT NULL, 
