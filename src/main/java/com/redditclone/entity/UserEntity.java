@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.redditclone.model.User;
+
 @Entity
 @Table(name = "user")
 public class UserEntity {
@@ -108,6 +110,4 @@ public class UserEntity {
 	public void setTopicList(List<TopicEntity> topicList) {
 		this.topicList = topicList;
 	}
-	
-	
 }

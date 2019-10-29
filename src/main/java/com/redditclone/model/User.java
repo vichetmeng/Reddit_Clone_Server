@@ -8,7 +8,7 @@ import com.redditclone.entity.UserEntity;
 public class User {
 	private Integer uid;
 	private String email;
-	private String passwordHash;
+	private String password;
 	private String username;
 	private String avatarUrl;
 	private List<Post> postList;
@@ -32,11 +32,12 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPasswordHash() {
-		return passwordHash;
+	
+	public String getPassword() {
+		return password;
 	}
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getUsername() {
 		return username;
