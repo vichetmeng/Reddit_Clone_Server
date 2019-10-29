@@ -1,5 +1,6 @@
 package com.redditclone.dao;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.redditclone.entity.UserEntity;
 import com.redditclone.model.Post;
+import com.redditclone.utility.HashingUtility;
 
 
 @Repository
@@ -21,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+ 
 	@Override
 	public Integer login(String username, String password) {
 		// TODO Auto-generated method stub
@@ -30,7 +32,9 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Integer register(String username, String password) {
-		// TODO Auto-generated method stub
+		UserEntity ue = new UserEntity();
+		ue.setUsername(username);
+		ue.setPasswordHash(HashingUtility.getHashValue(password));
 		return null;
 	}
 
