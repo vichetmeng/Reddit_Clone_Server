@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-/target/
-target/
-./target
-*.class
-=======
 .classpath
 .project
 .settings/
 target/
->>>>>>> 9f2a16aa52451af056efa3aa6b27c277522506f8
