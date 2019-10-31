@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.redditclone.dao.UserDAO;
+import com.redditclone.model.User;
 
 @SpringBootApplication
 public class SpringStarter implements CommandLineRunner {
@@ -31,7 +32,11 @@ public class SpringStarter implements CommandLineRunner {
 //				System.out.println("Comment added date: " + c.getDateAdded().toLocaleString());
 //			}
 //		}
-
+//		User u = new User();
+//		u.setEmail("vichet@infosys.com");
+//		u.setUsername("vichetm");
+//		u.setPassword("vichet123");
+//		userDAO.register(u);
 	}
 
 }
