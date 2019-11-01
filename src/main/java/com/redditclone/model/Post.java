@@ -11,6 +11,7 @@ public class Post {
 	private String pictureUrl;
 	private Integer uid;
 	private Integer tid;
+	private String posterUsername;
 	private LocalDateTime dateCreated;
 	public Integer getPid() {
 		return pid;
@@ -66,6 +67,12 @@ public class Post {
 	}
 	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+	public String getPosterUsername() {
+		return posterUsername;
+	}
+	public void setPosterUsername(String posterUsername) {
+		this.posterUsername = posterUsername;
 	}
 	
 }

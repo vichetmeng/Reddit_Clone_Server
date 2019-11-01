@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.redditclone.entity.PostEntity;
 import com.redditclone.entity.TopicEntity;
@@ -60,26 +61,23 @@ public class TopicDAOImpl implements TopicDAO {
 
 	@Override
 	public List<Post> getPostsInTopic(Integer topicId) {
-//		TopicEntity te = em.find(TopicEntity.class, topicId);
-//		List<Post> pl = new ArrayList<>();
-//		if (te != null) {
-//			List<PostEntity> pel = te.getPostlist();
-//			
-//			for (PostEntity pe : pel) {
-//				Post p = new Post();
-//				p.setPid(pe.getPid());
-//				p.setTitle(pe.getTitle());
-//				p.setUpvoteCount(pe.getUpvoteCount());
-//				p.setDownvoteCount(pe.getDownvoteCount());
-//				//p.setPictureUrl(pe.getPictureUrl());
-//				p.setContent(pe.getContent());
-//				p.setDateCreated(pe.getDateCreated());
-//				p.setUser(pe.getUser());
-//				pl.add(p);
-//			}
-//		}
-//		return pl;
-		return null;
+		Query q = em.createQuery("Select p from PostEntity p where p.topicid = :topicid");
+		q.setParameter("topicid", topicId);
+		List<PostEntity> pel = q.getResultList();
+		List<Post> pl = new ArrayList<>();
+		
+		for (PostEntity pe : pel) {
+			Post p = new Post();
+			p.setPid(pe.getPid());
+			p.setTitle(pe.getTitle());
+			p.setUpvoteCount(pe.getUpvoteCount());
+			p.setDownvoteCount(pe.getDownvoteCount());
+			p.setContent(pe.getContent());
+			p.setDateCreated(pe.getDateCreated());
+			p.setPosterUsername(pe.getUser().getUsername());
+			pl.add(p);
+		}
+		return pl;
 	}
 
 	@Override
