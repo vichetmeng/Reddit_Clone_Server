@@ -32,11 +32,11 @@ public class SpringStarter implements CommandLineRunner {
 //				System.out.println("Comment added date: " + c.getDateAdded().toLocaleString());
 //			}
 //		}
-//		User u = new User();
-//		u.setEmail("vichet@infosys.com");
-//		u.setUsername("vichetm");
-//		u.setPassword("vichet123");
-//		userDAO.register(u);
+		User u = new User();
+		u.setEmail("vichet@infosys.com");
+		u.setUsername("vichetm");
+		u.setPassword("vichet123");
+		userDAO.register(u);
 	}
 
 }
