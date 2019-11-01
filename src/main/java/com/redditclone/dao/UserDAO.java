@@ -16,4 +16,6 @@ public interface UserDAO {
 	public List<Post> getSavedPosts(Integer uid);
 	public List<Post> getPosts(Integer uid);
 	public List<Post> getP(Integer uid);
+	
+	public List<Post> getPFromRepo(Integer uid);
 }
