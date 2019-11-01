@@ -1,9 +1,6 @@
 package com.redditclone.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import com.redditclone.entity.UserEntity;
 
 public class Post {
 	private Integer pid;
@@ -12,9 +9,9 @@ public class Post {
 	private Integer upvoteCount;
 	private Integer downvoteCount;
 	private String pictureUrl;
-	private Integer userid;
-	private Integer topicid;
-	
+	private Integer uid;
+	private Integer tid;
+	private String posterUsername;
 	private LocalDateTime dateCreated;
 	public Integer getPid() {
 		return pid;
@@ -52,6 +49,12 @@ public class Post {
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
 	
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
@@ -59,17 +62,18 @@ public class Post {
 	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public Integer getUserid() {
-		return userid;
+	public Integer getTid() {
+		return tid;
 	}
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setTid(Integer tid) {
+		this.tid = tid;
 	}
-	public Integer getTopicid() {
-		return topicid;
+	
+	public String getPosterUsername() {
+		return posterUsername;
 	}
-	public void setTopicid(Integer topicid) {
-		this.topicid = topicid;
+	public void setPosterUsername(String posterUsername) {
+		this.posterUsername = posterUsername;
 	}
 	
 }
