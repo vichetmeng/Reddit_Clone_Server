@@ -111,4 +111,22 @@ public class UserDAOImpl implements UserDAO {
 //		return pl;
 		return null;
 	}
+
+	@Override
+	public Boolean upvotePost(Integer uid, Integer pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean downvotePost(Integer uid, Integer pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean savePost(Integer uid, Integer pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
