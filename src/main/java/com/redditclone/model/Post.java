@@ -1,7 +1,6 @@
 package com.redditclone.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Post {
 	private Integer pid;
@@ -10,8 +9,8 @@ public class Post {
 	private Integer upvoteCount;
 	private Integer downvoteCount;
 	private String pictureUrl;
-	private User user;
-	private List<Comment> commentsList;
+	private Integer uid;
+	private Integer tid;
 	private LocalDateTime dateCreated;
 	public Integer getPid() {
 		return pid;
@@ -50,17 +49,17 @@ public class Post {
 		this.pictureUrl = pictureUrl;
 	}
 	
-	public User getUser() {
-		return user;
+	public Integer getUid() {
+		return uid;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
-	public List<Comment> getCommentsList() {
-		return commentsList;
+	public Integer getTid() {
+		return tid;
 	}
-	public void setCommentsList(List<Comment> commentsList) {
-		this.commentsList = commentsList;
+	public void setTid(Integer tid) {
+		this.tid = tid;
 	}
 	public LocalDateTime getDateCreated() {
 		return dateCreated;

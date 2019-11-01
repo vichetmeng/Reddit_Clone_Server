@@ -38,7 +38,11 @@ public class UserDAOImpl implements UserDAO {
  
 	@Override
 	public Integer login(String username, String password) {
-
+		Query q = em.createQuery("Select u from UserEntity u where u.username = :username");
+		q.setParameter("username", username);
+		UserEntity ue = (UserEntity) q.getSingleResult();
+		if (ue == null) return null;
+		if (ue.getPasswordHash().equals(HashingUtility.getHashValue(password))) return ue.getUid();
 		return null;
 	}
 
@@ -65,9 +69,7 @@ public class UserDAOImpl implements UserDAO {
 			p.setDateCreated(pe.getDateCreated());
 			p.setDownvoteCount(pe.getDownvoteCount());
 			p.setUpvoteCount(pe.getUpvoteCount());
-			User u = new User();
-			u.setUsername(ue.getUsername());
-			p.setUser(u);
+			p.setUid(uid);
 			p.setTitle(pe.getTitle());
 			p.setContent(pe.getContent());
 			pl.add(p);
@@ -87,9 +89,7 @@ public class UserDAOImpl implements UserDAO {
 			p.setDateCreated(pe.getDateCreated());
 			p.setDownvoteCount(pe.getDownvoteCount());
 			p.setUpvoteCount(pe.getUpvoteCount());
-			User u = new User();
-			u.setUsername(ue.getUsername());
-			p.setUser(u);
+			p.setUid(uid);
 			p.setTitle(pe.getTitle());
 			p.setContent(pe.getContent());
 			pl.add(p);
@@ -154,19 +154,37 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Boolean upvotePost(Integer uid, Integer pid) {
-		// TODO Auto-generated method stub
-		return null;
+		PostEntity pe = em.find(PostEntity.class, pid);
+		UserEntity ue = em.find(UserEntity.class, uid);
+		
+		// Add the post entity into the ue's upvotedpost
+		// increment the post's upvote count by 1
+		if (pe == null || ue == null) return false;
+		ue.getPostsUpvoted().add(pe);
+		pe.setUpvoteCount(pe.getUpvoteCount()+1);
+		return true;
 	}
 
 	@Override
 	public Boolean downvotePost(Integer uid, Integer pid) {
-		// TODO Auto-generated method stub
-		return null;
+		PostEntity pe = em.find(PostEntity.class, pid);
+		UserEntity ue = em.find(UserEntity.class, uid);
+		
+		// Add the post entity into the ue's downvotepost
+		// increment the post's downvote count by 1
+		if (pe == null || ue == null) return false;
+		ue.getPostsDownvoted().add(pe);
+		pe.setDownvoteCount(pe.getDownvoteCount()+1);
+		return true;
 	}
 
 	@Override
 	public Boolean savePost(Integer uid, Integer pid) {
-		// TODO Auto-generated method stub
-		return null;
+		PostEntity pe = em.find(PostEntity.class, pid);
+		UserEntity ue = em.find(UserEntity.class, uid);
+		
+		if (pe == null || ue == null) return false;
+		ue.getPostsSaved().add(pe);
+		return true;
 	}
 }
