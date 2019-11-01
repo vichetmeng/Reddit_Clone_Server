@@ -3,8 +3,6 @@ package com.redditclone.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.redditclone.entity.UserEntity;
-
 public class Post {
 	private Integer pid;
 	private String content;
@@ -12,7 +10,7 @@ public class Post {
 	private Integer upvoteCount;
 	private Integer downvoteCount;
 	private String pictureUrl;
-	private UserEntity user;
+	private User user;
 	private List<Comment> commentsList;
 	private LocalDateTime dateCreated;
 	public Integer getPid() {
@@ -51,10 +49,11 @@ public class Post {
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
-	public UserEntity getUser() {
+	
+	public User getUser() {
 		return user;
 	}
-	public void setUser(UserEntity user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	public List<Comment> getCommentsList() {

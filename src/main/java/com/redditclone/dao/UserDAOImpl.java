@@ -21,12 +21,19 @@ import com.redditclone.utility.HashingUtility;
 @Transactional
 public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
-	EntityManager entityManager;
+	EntityManager em;
 
 	@Override
 	public User getUser(Integer uid) {
-		// TODO Auto-generated method stub
-		return null;
+		UserEntity ue = em.find(UserEntity.class, uid);
+		if (ue == null) return null;
+		User u = new User();
+		u.setUsername(ue.getUsername());
+		u.setEmail(ue.getEmail());
+		u.setDateJoined(ue.getDateJoined());
+		u.setUid(ue.getUid());
+		u.setAvatarUrl(ue.getAvatarUrl());
+		return u;
 	}
  
 	@Override
@@ -42,24 +49,57 @@ public class UserDAOImpl implements UserDAO {
 		ue.setPasswordHash(HashingUtility.getHashValue(user.getPassword()));
 		ue.setDateJoined(LocalDateTime.now());
 		ue.setEmail(user.getEmail());
-		entityManager.persist(ue);
+		em.persist(ue);
 		return ue.getUid();
 	}
 	
 	@Override
 	public List<Post> getUpvotedPosts(Integer uid) {
-		Post p = new Post();
-		return null;
+		UserEntity ue = em.find(UserEntity.class, uid);
+		if(ue == null) return null;
+		List<PostEntity> pel = ue.getPostsUpvoted();
+		List<Post> pl = new ArrayList<>();
+		for (PostEntity pe : pel) {
+			Post p = new Post();
+			p.setPid(pe.getPid());
+			p.setDateCreated(pe.getDateCreated());
+			p.setDownvoteCount(pe.getDownvoteCount());
+			p.setUpvoteCount(pe.getUpvoteCount());
+			User u = new User();
+			u.setUsername(ue.getUsername());
+			p.setUser(u);
+			p.setTitle(pe.getTitle());
+			p.setContent(pe.getContent());
+			pl.add(p);
+		}
+		return pl;
 	}
 
 	@Override
 	public List<Post> getDownvotedPosts(Integer uid) {
-		return null;
+		UserEntity ue = em.find(UserEntity.class, uid);
+		if(ue == null) return null;
+		List<PostEntity> pel = ue.getPostsDownvoted();
+		List<Post> pl = new ArrayList<>();
+		for (PostEntity pe : pel) {
+			Post p = new Post();
+			p.setPid(pe.getPid());
+			p.setDateCreated(pe.getDateCreated());
+			p.setDownvoteCount(pe.getDownvoteCount());
+			p.setUpvoteCount(pe.getUpvoteCount());
+			User u = new User();
+			u.setUsername(ue.getUsername());
+			p.setUser(u);
+			p.setTitle(pe.getTitle());
+			p.setContent(pe.getContent());
+			pl.add(p);
+		}
+		return pl;
 	}
 
 	@Override
 	public List<Post> getSavedPosts(Integer uid) {
-		UserEntity ue = entityManager.find(UserEntity.class, uid);
+		UserEntity ue = em.find(UserEntity.class, uid);
 		List<PostEntity> pel = ue.getPostsSaved();
 		List<Post> pl = new ArrayList<>();
 		for (PostEntity pe : pel) {
@@ -77,7 +117,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Boolean usernameExists(String username) {
-		Query q = entityManager.createQuery("Select u from UserEntity u where u.username = :username");
+		Query q = em.createQuery("Select u from UserEntity u where u.username = :username");
 		q.setParameter("username", username);
 		UserEntity ue = (UserEntity) q.getSingleResult();
 		if (ue != null) return true;
@@ -86,7 +126,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Boolean emailExists(String email) {
-		Query q = entityManager.createQuery("Select u from UserEntity u where u.email = :email");
+		Query q = em.createQuery("Select u from UserEntity u where u.email = :email");
 		q.setParameter("email", email);
 		UserEntity ue = (UserEntity) q.getSingleResult();
 		if (ue != null) return true;
@@ -95,21 +135,21 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Post> getPosts(Integer uid) {
-//		UserEntity ue = entityManager.find(UserEntity.class, uid);
-//		List<PostEntity> pel = ue.getPostList();
-//		List<Post> pl = new ArrayList<>();
-//		for (PostEntity pe : pel) {
-//			Post p = new Post();
-//			p.setPid(pe.getPid());
-//			p.setTitle(pe.getTitle());
-//			p.setContent(pe.getContent());
-//			p.setDateCreated(pe.getDateCreated());
-//			p.setDownvoteCount(pe.getDownvoteCount());
-//			p.setUpvoteCount(pe.getDownvoteCount());
-//			pl.add(p);
-//		}
-//		return pl;
-		return null;
+		Query q = em.createQuery("Select p from PostEntity p where p.useruid = :uid");
+		q.setParameter("uid", uid);
+		List<PostEntity> pel = q.getResultList();
+		List<Post> pl = new ArrayList<>();
+		for (PostEntity pe : pel) {
+			Post p = new Post();
+			p.setPid(pe.getPid());
+			p.setTitle(pe.getTitle());
+			p.setContent(pe.getContent());
+			p.setDateCreated(pe.getDateCreated());
+			p.setDownvoteCount(pe.getDownvoteCount());
+			p.setUpvoteCount(pe.getDownvoteCount());
+			pl.add(p);
+		}
+		return pl;
 	}
 
 	@Override
