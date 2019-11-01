@@ -28,7 +28,12 @@ public class PostEntity {
 	@JoinColumn(name = "useruid")
 	private UserEntity user;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "topicid")
+	private TopicEntity topic;
+	
 	private LocalDateTime dateCreated;
+	
 	public Integer getPid() {
 		return pid;
 	}
@@ -78,28 +83,11 @@ public class PostEntity {
 	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
-		return result;
+	public TopicEntity getTopic() {
+		return topic;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PostEntity other = (PostEntity) obj;
-		if (pid == null) {
-			if (other.pid != null)
-				return false;
-		} else if (!pid.equals(other.pid))
-			return false;
-		return true;
+	public void setTopic(TopicEntity topic) {
+		this.topic = topic;
 	}
 	
 	

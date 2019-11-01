@@ -14,4 +14,5 @@ public interface TopicDAO {
 	public Integer updateTopic(Topic t);
 	public Boolean userIsMember(Integer topicId, Integer uid);
 	public Boolean userIsMonitor(Integer topicId, Integer uid);
+	public Boolean deleteTopic(Integer tid);
 }

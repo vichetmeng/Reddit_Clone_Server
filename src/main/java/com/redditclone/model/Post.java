@@ -12,8 +12,9 @@ public class Post {
 	private Integer upvoteCount;
 	private Integer downvoteCount;
 	private String pictureUrl;
-	private UserEntity user;
-	private List<Comment> commentsList;
+	private Integer userid;
+	private Integer topicid;
+	
 	private LocalDateTime dateCreated;
 	public Integer getPid() {
 		return pid;
@@ -51,23 +52,24 @@ public class Post {
 	public void setPictureUrl(String pictureUrl) {
 		this.pictureUrl = pictureUrl;
 	}
-	public UserEntity getUser() {
-		return user;
-	}
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-	public List<Comment> getCommentsList() {
-		return commentsList;
-	}
-	public void setCommentsList(List<Comment> commentsList) {
-		this.commentsList = commentsList;
-	}
+	
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}
 	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+	public Integer getTopicid() {
+		return topicid;
+	}
+	public void setTopicid(Integer topicid) {
+		this.topicid = topicid;
 	}
 	
 }

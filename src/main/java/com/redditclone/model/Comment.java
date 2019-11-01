@@ -9,7 +9,8 @@ public class Comment {
 	private Integer downvoteCount;
 	private LocalDateTime dateCreated;
 	private Comment parentComment;
-	private User user;
+	private Integer userid;
+	private String username;
 	
 	public Integer getCid() {
 		return cid;
@@ -47,11 +48,18 @@ public class Comment {
 	public void setParentComment(Comment parentComment) {
 		this.parentComment = parentComment;
 	}
-	public User getUser() {
-		return user;
+	public Integer getUserid() {
+		return userid;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	
 }
