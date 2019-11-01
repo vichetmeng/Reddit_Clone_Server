@@ -15,4 +15,6 @@ public interface UserDAO {
 	public List<Post> getDownvotedPosts(Integer uid);
 	public List<Post> getSavedPosts(Integer uid);
 	public List<Post> getPosts(Integer uid);
+	
+	
 }
