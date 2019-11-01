@@ -33,6 +33,9 @@ public class TopicEntity {
 	inverseJoinColumns = @JoinColumn(name="useruid"))
 	private List<UserEntity> monitorList;
 	
+	@JoinTable(name="subredditmonitor",joinColumns=@JoinColumn(name="topicid"),inverseJoinColumns=@JoinColumn(name="useruid"))
+	private List<TopicEntity> memberList;
+	
 	private LocalDateTime dateCreated;
 	
 	public Integer getTid() {
@@ -89,6 +92,14 @@ public class TopicEntity {
 
 	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+
+	public List<TopicEntity> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<TopicEntity> memberList) {
+		this.memberList = memberList;
 	} 
 	
 }
