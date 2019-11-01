@@ -39,7 +39,9 @@ public class CommentEntity {
 	@JoinColumn(name="useruid")
 	private UserEntity user;
 	
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="postpid")
+	private PostEntity post; 
 
 	public Integer getCid() {
 		return cid;
@@ -95,6 +97,14 @@ public class CommentEntity {
 
 	public void setUser(UserEntity user) {
 		this.user = user;
+	}
+
+	public PostEntity getPost() {
+		return post;
+	}
+
+	public void setPost(PostEntity post) {
+		this.post = post;
 	}
 	
 }
