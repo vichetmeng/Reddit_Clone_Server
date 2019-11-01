@@ -23,10 +23,6 @@ public class TopicEntity {
 	private String name; 
 	private String rules;
 	private String description;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="topicid")
-	private List<PostEntity> postlist;
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="blacklist", joinColumns=@JoinColumn(name="topicid"), 
@@ -76,15 +72,6 @@ public class TopicEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public List<PostEntity> getPostlist() {
-		return postlist;
-	}
-
-	public void setPostlist(List<PostEntity> postlist) {
-		this.postlist = postlist;
-	}
-
 	public List<UserEntity> getUserBlacklist() {
 		return userBlacklist;
 	}

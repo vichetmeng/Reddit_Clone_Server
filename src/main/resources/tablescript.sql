@@ -26,13 +26,14 @@ DROP TABLE IF EXISTS Post;
 DROP TABLE IF EXISTS Topic;
 DROP TABLE IF EXISTS User;
 
+
 CREATE TABLE Blacklist (
   UserUId int(10) NOT NULL, 
   TopicId int(10) NOT NULL, 
   PRIMARY KEY (UserUId, 
   TopicId));
 CREATE TABLE Comment (
-  CId            int(10) NOT NULL  AUTO_INCREMENT, 
+  CId            int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Content        text NOT NULL, 
   Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
   Downvote_Count int(10) DEFAULT 0 NOT NULL, 
@@ -43,12 +44,12 @@ CREATE TABLE Comment (
   PRIMARY KEY (CId), 
   UNIQUE INDEX (CId));
 CREATE TABLE Post (
-  PId            int(10) NOT NULL  AUTO_INCREMENT,
-  title			 varchar(255) not null,
-  Content        text NOT NULL,
+  PId            int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT,
+  title          varchar(255) not null,
+  Content        text NOT NULL, 
   TopicId        int(10) NOT NULL, 
-  UserUId        int(10) NOT NULL, 
-  picture_url    varchar(255), 
+  UserUId        int(10), 
+  picture_url    varchar(255) NOT NULL, 
   Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
   Downvote_Count int(10) DEFAULT 0 NOT NULL, 
   Date_Created   datetime NOT NULL, 
@@ -65,15 +66,15 @@ CREATE TABLE SubRedditMonitor (
   PRIMARY KEY (UserUId, 
   TopicId));
 CREATE TABLE Topic (
-  TId          int(10) NOT NULL AUTO_INCREMENT, 
+  TId          int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Name         varchar(50) NOT NULL UNIQUE, 
   Rules        varchar(255), 
   Description  text, 
   Date_Created datetime NOT NULL, 
   PRIMARY KEY (TId), 
   UNIQUE INDEX (TId));
-CREATE TABLE User (
-  UId           int(10)  NOT NULL  AUTO_INCREMENT, 
+CREATE TABLE `User` (
+  UId           int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
   Email         varchar(40) NOT NULL UNIQUE, 
   Password_Hash varchar(100) NOT NULL, 
   Username      varchar(50) NOT NULL UNIQUE, 
@@ -96,22 +97,22 @@ CREATE TABLE User_Upvoted (
   UserUId int(10) NOT NULL, 
   PRIMARY KEY (PostPId, 
   UserUId));
-ALTER TABLE SubRedditMonitor ADD CONSTRAINT FKSubRedditM670013 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
-ALTER TABLE SubRedditMonitor ADD CONSTRAINT FKSubRedditM440551 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
-ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM666300 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
+ALTER TABLE `SubRedditMonitor	` ADD CONSTRAINT FKSubRedditM670013 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE `SubRedditMonitor	` ADD CONSTRAINT FKSubRedditM440551 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
+ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM666300 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM534752 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
 ALTER TABLE Post ADD CONSTRAINT FKPost964424 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
-ALTER TABLE Post ADD CONSTRAINT FKPost734962 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
+ALTER TABLE Post ADD CONSTRAINT FKPost734962 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE User_Upvoted ADD CONSTRAINT FKUser_Upvot266903 FOREIGN KEY (PostPId) REFERENCES Post (PId);
-ALTER TABLE User_Upvoted ADD CONSTRAINT FKUser_Upvot507957 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
+ALTER TABLE User_Upvoted ADD CONSTRAINT FKUser_Upvot507957 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE User_Downvoted ADD CONSTRAINT FKUser_Downv55394 FOREIGN KEY (PostPId) REFERENCES Post (PId);
-ALTER TABLE User_Downvoted ADD CONSTRAINT FKUser_Downv296448 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
+ALTER TABLE User_Downvoted ADD CONSTRAINT FKUser_Downv296448 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE Comment ADD CONSTRAINT FKComment916862 FOREIGN KEY (PostPId) REFERENCES Post (PId);
-ALTER TABLE Comment ADD CONSTRAINT FKComment675808 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
+ALTER TABLE Comment ADD CONSTRAINT FKComment675808 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE Comment ADD CONSTRAINT FKComment504122 FOREIGN KEY (ParentCId) REFERENCES Comment (CId);
 ALTER TABLE User_Save ADD CONSTRAINT FKUser_Save464157 FOREIGN KEY (PostPId) REFERENCES Post (PId);
-ALTER TABLE User_Save ADD CONSTRAINT FKUser_Save223103 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
-ALTER TABLE Blacklist ADD CONSTRAINT FKBlacklist253807 FOREIGN KEY (UserUId) REFERENCES  User  (UId);
+ALTER TABLE User_Save ADD CONSTRAINT FKUser_Save223103 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE Blacklist ADD CONSTRAINT FKBlacklist253807 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE Blacklist ADD CONSTRAINT FKBlacklist516730 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
 
 
@@ -152,6 +153,5 @@ INSERT INTO post(title,content,topicid, useruid, date_created) values("Programmi
 
 select * from user;
 select * from post;
-
-
+select * from topic;
 

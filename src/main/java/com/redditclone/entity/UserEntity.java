@@ -21,16 +21,13 @@ import com.redditclone.model.User;
 @Table(name = "user")
 public class UserEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer uid;
 	private String email;
 	private String passwordHash;
 	private String username;
 	@Column(name = "avatar")
 	private String avatarUrl;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="useruid")
-	private List<PostEntity> postList;
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_upvoted",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
 	private List<PostEntity> postsUpvoted;
@@ -83,12 +80,6 @@ public class UserEntity {
 	}
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
-	}
-	public List<PostEntity> getPostList() {
-		return postList;
-	}
-	public void setPostList(List<PostEntity> postList) {
-		this.postList = postList;
 	}
 	public List<PostEntity> getPostsUpvoted() {
 		return postsUpvoted;
