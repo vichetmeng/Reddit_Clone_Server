@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
  
 	@Override
 	public Integer login(String username, String password) {
-		User myUser = new User(); 
+
 		return null;
 	}
 

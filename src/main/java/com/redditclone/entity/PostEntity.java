@@ -28,9 +28,7 @@ public class PostEntity {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "useruid")
 	private UserEntity user;
-	@OneToMany(cascade = CascadeType.ALL )
-	@JoinColumn(name = "postpid")
-	private List<CommentEntity> commentsList;
+	
 	private LocalDateTime dateCreated;
 	public Integer getPid() {
 		return pid;
@@ -74,12 +72,7 @@ public class PostEntity {
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
-	public List<CommentEntity> getCommentsList() {
-		return commentsList;
-	}
-	public void setCommentsList(List<CommentEntity> commentsList) {
-		this.commentsList = commentsList;
-	}
+
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}

@@ -41,6 +41,16 @@ public class UserEntity {
 	@JoinTable(name="subredditmember",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="topicid"))
 	private List<TopicEntity> topicList;
 	private LocalDateTime dateJoined;
+	
+	public UserEntity() {	
+	}
+	
+	public UserEntity(String email, String passwordHash, String username) {
+		super();
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.username = username;
+	}
 	public Integer getUid() {
 		return uid;
 	}
