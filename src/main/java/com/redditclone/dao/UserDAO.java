@@ -15,4 +15,8 @@ public interface UserDAO {
 	public List<Post> getDownvotedPosts(Integer uid);
 	public List<Post> getSavedPosts(Integer uid);
 	public List<Post> getPosts(Integer uid);
+
+	public Boolean upvotePost(Integer uid, Integer pid);
+	public Boolean downvotePost(Integer uid, Integer pid);
+	public Boolean savePost(Integer uid, Integer pid);
 }

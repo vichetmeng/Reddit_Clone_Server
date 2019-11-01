@@ -28,8 +28,6 @@ public class UserEntity {
 	private String username;
 	@Column(name = "avatar")
 	private String avatarUrl;
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-	private List<PostEntity> postList;
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_upvoted",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
 	private List<PostEntity> postsUpvoted;
@@ -73,12 +71,6 @@ public class UserEntity {
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
 	}
-	public List<PostEntity> getPostList() {
-		return postList;
-	}
-	public void setPostList(List<PostEntity> postList) {
-		this.postList = postList;
-	}
 	public List<PostEntity> getPostsUpvoted() {
 		return postsUpvoted;
 	}
@@ -108,14 +100,5 @@ public class UserEntity {
 	}
 	public void setTopicList(List<TopicEntity> topicList) {
 		this.topicList = topicList;
-	}
-	public void addPost(PostEntity pe) {
-		this.postList.add(pe);
-		pe.setUser(this);
-	}
-	
-	public void removePost(PostEntity pe) {
-		pe.setUser(null);
-		this.postList.remove(pe);
 	}
 }
