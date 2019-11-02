@@ -53,7 +53,6 @@ public class SpringStarter implements CommandLineRunner {
 //		u2.setUsername("roden");
 //		u2.setPassword("roden123");
 //		userDAO.register(u2);
-		
 		// Make a new topic
 		System.out.println(userDAO.login("vichetmm", "vichet123"));
 		

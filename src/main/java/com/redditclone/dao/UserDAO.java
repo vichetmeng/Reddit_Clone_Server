@@ -17,5 +17,11 @@ public interface UserDAO {
 	public List<Post> getPosts(Integer uid);
 	public Boolean upvotePost(Integer uid, Integer pid);
 	public Boolean downvotePost(Integer uid, Integer pid);
+	/**
+	 * This function allows the user to save a post
+	 * @param uid the user's id
+	 * @param pid the post's id
+	 * @return true if it successfully saved the post, false otherwise (couldn't found the post or user).
+	 */
 	public Boolean savePost(Integer uid, Integer pid);
 }
