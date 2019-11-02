@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.redditclone.dao.TopicDAO;
 import com.redditclone.dao.UserDAO;
 import com.redditclone.model.User;
 
@@ -12,6 +13,8 @@ import com.redditclone.model.User;
 public class SpringStarter implements CommandLineRunner {
 	@Autowired
 	UserDAO userDAO;
+	@Autowired
+	TopicDAO topicDAO;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringStarter.class, args);
@@ -19,7 +22,7 @@ public class SpringStarter implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		System.out.println("************************* RUN CALLED *************************");
+		System.out.println("************************* RUN CALLED *************************");
 //		User u = userDAO.getAllUsers("vichetmeng");
 //		if (u != null) {
 //			System.out.println("Username: " + u.getUsername());
@@ -32,11 +35,33 @@ public class SpringStarter implements CommandLineRunner {
 //				System.out.println("Comment added date: " + c.getDateAdded().toLocaleString());
 //			}
 //		}
-		User u = new User();
-		u.setEmail("vichet@infosys.com");
-		u.setUsername("vichetm");
-		u.setPassword("vichet123");
-		userDAO.register(u);
+		// Register a user
+//		User u = new User();
+//		u.setEmail("vichet@infosys.com");
+//		u.setUsername("vichetm");
+//		u.setPassword("vichet123");
+//		userDAO.register(u);
+		
+//		User u1 = new User();
+//		u1.setEmail("khang@infosys.com");
+//		u1.setUsername("khang");
+//		u1.setPassword("khang123");
+//		userDAO.register(u1);
+//		
+//		User u2 = new User();
+//		u2.setEmail("roden@infosys.com");
+//		u2.setUsername("roden");
+//		u2.setPassword("roden123");
+//		userDAO.register(u2);
+		
+		// Make a new topic
+		System.out.println(userDAO.login("vichetmm", "vichet123"));
+		
+		// Make a new post
+		
+		
+		
+		// Make a new comment
 	}
 
 }

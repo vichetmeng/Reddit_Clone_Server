@@ -7,6 +7,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
 
 import com.redditclone.entity.PostEntity;
 import com.redditclone.entity.TopicEntity;
@@ -14,7 +17,12 @@ import com.redditclone.entity.UserEntity;
 import com.redditclone.model.Post;
 import com.redditclone.model.Topic;
 import com.redditclone.model.User;
-
+/**
+ * @author vichetmeng
+ *
+ */
+@Repository
+@Transactional
 public class TopicDAOImpl implements TopicDAO {
 	@PersistenceContext
 	EntityManager em;

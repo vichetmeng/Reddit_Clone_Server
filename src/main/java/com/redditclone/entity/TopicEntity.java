@@ -22,7 +22,6 @@ public class TopicEntity {
 	private String name; 
 	private String rules;
 	private String description;
-
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="blacklist", joinColumns=@JoinColumn(name="topicid"), 
 	inverseJoinColumns = @JoinColumn(name="useruid"))
@@ -32,7 +31,7 @@ public class TopicEntity {
 	@JoinTable(name="subredditmonitor", joinColumns=@JoinColumn(name="topicid"), 
 	inverseJoinColumns = @JoinColumn(name="useruid"))
 	private List<UserEntity> monitorList;
-	
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="subredditmonitor",joinColumns=@JoinColumn(name="topicid"),inverseJoinColumns=@JoinColumn(name="useruid"))
 	private List<TopicEntity> memberList;
 	

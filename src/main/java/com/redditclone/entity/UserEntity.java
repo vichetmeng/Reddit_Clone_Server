@@ -40,7 +40,7 @@ public class UserEntity {
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="subredditmember",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="topicid"))
 	private List<TopicEntity> memberList;
-	
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="subredditmonitor",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="topicid"))
 	private List<TopicEntity> monitorList;
 	
