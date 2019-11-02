@@ -41,25 +41,23 @@ public class SpringStarter implements CommandLineRunner {
 //		u.setUsername("vichetm");
 //		u.setPassword("vichet123");
 //		userDAO.register(u);
-		
+//
 //		User u1 = new User();
 //		u1.setEmail("khang@infosys.com");
 //		u1.setUsername("khang");
 //		u1.setPassword("khang123");
 //		userDAO.register(u1);
-//		
+//
 //		User u2 = new User();
 //		u2.setEmail("roden@infosys.com");
 //		u2.setUsername("roden");
 //		u2.setPassword("roden123");
 //		userDAO.register(u2);
 		// Make a new topic
-		System.out.println(userDAO.login("vichetmm", "vichet123"));
-		
+//		System.out.println(userDAO.login("vichetmm", "vichet123"));
+//		System.out.println(userDAO.usernameExists("vichetm"));
 		// Make a new post
-		
-		
-		
+
 		// Make a new comment
 	}
 
