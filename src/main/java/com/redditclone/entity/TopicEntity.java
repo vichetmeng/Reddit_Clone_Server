@@ -33,7 +33,9 @@ public class TopicEntity {
 	inverseJoinColumns = @JoinColumn(name="useruid"))
 	private List<UserEntity> monitorList;
 	
-	@JoinTable(name="subredditmonitor",joinColumns=@JoinColumn(name="topicid"),inverseJoinColumns=@JoinColumn(name="useruid"))
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="subredditmember",joinColumns=@JoinColumn(name="topicid"),
+	inverseJoinColumns=@JoinColumn(name="useruid"))
 	private List<TopicEntity> memberList;
 	
 	private LocalDateTime dateCreated;
