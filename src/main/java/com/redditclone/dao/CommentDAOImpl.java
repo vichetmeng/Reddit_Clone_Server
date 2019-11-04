@@ -64,7 +64,7 @@ public class CommentDAOImpl implements CommentDAO{
 	
 	
 	@Override
-	public Integer createComment(Integer pid, Comment comment, Integer uid, Integer parentid) throws Exception {
+	public Integer createComment(Integer pid, Integer uid, Integer parentid, Comment comment) throws Exception {
 		CommentEntity ce = new CommentEntity();
 		UserEntity ue = em.find(UserEntity.class, uid);
 		if (ue==null) throw new Exception("Invalid User"); 
