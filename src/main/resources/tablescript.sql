@@ -33,7 +33,7 @@ CREATE TABLE Blacklist (
   PRIMARY KEY (UserUId, 
   TopicId));
 CREATE TABLE Comment (
-  CId            int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
+  CId            int(10) NOT NULL AUTO_INCREMENT, 
   Content        text NOT NULL, 
   Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
   Downvote_Count int(10) DEFAULT 0 NOT NULL, 
@@ -44,7 +44,7 @@ CREATE TABLE Comment (
   PRIMARY KEY (CId), 
   UNIQUE INDEX (CId));
 CREATE TABLE Post (
-  PId            int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT,
+  PId            int(10) NOT NULL AUTO_INCREMENT,
   title          varchar(255) not null,
   Content        text NOT NULL, 
   TopicId        int(10) NOT NULL, 
@@ -66,7 +66,7 @@ CREATE TABLE SubRedditMonitor (
   PRIMARY KEY (UserUId, 
   TopicId));
 CREATE TABLE Topic (
-  TId          int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
+  TId          int(10) NOT NULL AUTO_INCREMENT, 
   Name         varchar(50) NOT NULL UNIQUE, 
   Rules        varchar(255), 
   Description  text, 
@@ -74,7 +74,7 @@ CREATE TABLE Topic (
   PRIMARY KEY (TId), 
   UNIQUE INDEX (TId));
 CREATE TABLE `User` (
-  UId           int(10) DEFAULT 0 NOT NULL AUTO_INCREMENT, 
+  UId           int(10) NOT NULL AUTO_INCREMENT, 
   Email         varchar(40) NOT NULL UNIQUE, 
   Password_Hash varchar(100) NOT NULL, 
   Username      varchar(50) NOT NULL UNIQUE, 
@@ -97,8 +97,8 @@ CREATE TABLE User_Upvoted (
   UserUId int(10) NOT NULL, 
   PRIMARY KEY (PostPId, 
   UserUId));
-ALTER TABLE `SubRedditMonitor	` ADD CONSTRAINT FKSubRedditM670013 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
-ALTER TABLE `SubRedditMonitor	` ADD CONSTRAINT FKSubRedditM440551 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
+ALTER TABLE SubRedditMonitor ADD CONSTRAINT FKSubRedditM670013 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
+ALTER TABLE SubRedditMonitor ADD CONSTRAINT FKSubRedditM440551 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
 ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM666300 FOREIGN KEY (UserUId) REFERENCES `User` (UId);
 ALTER TABLE SubRedditMember ADD CONSTRAINT FKSubRedditM534752 FOREIGN KEY (TopicId) REFERENCES Topic (TId);
 ALTER TABLE Post ADD CONSTRAINT FKPost964424 FOREIGN KEY (TopicId) REFERENCES Topic (TId);

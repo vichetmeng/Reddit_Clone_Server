@@ -17,6 +17,10 @@ import com.redditclone.model.Post;
 import com.redditclone.model.User;
 import com.redditclone.utility.HashingUtility;
 
+/**
+ * @author vichetmeng
+ *
+ */
 @Repository
 @Transactional
 public class UserDAOImpl implements UserDAO {
@@ -36,16 +40,18 @@ public class UserDAOImpl implements UserDAO {
 		return u;
 	}
  
+	
 	@Override
 	public Integer login(String username, String password) {
 		Query q = em.createQuery("Select u from UserEntity u where u.username = :username");
 		q.setParameter("username", username);
-		UserEntity ue = (UserEntity) q.getSingleResult();
-		if (ue == null) return null;
-		if (ue.getPasswordHash().equals(HashingUtility.getHashValue(password))) return ue.getUid();
+		List<UserEntity> uel = q.getResultList();
+		if (uel.isEmpty()) return null;
+		if (uel.get(0).getPasswordHash().equals(HashingUtility.getHashValue(password))) return uel.get(0).getUid();
 		return null;
 	}
 
+	
 	@Override
 	public Integer register(User user) {
 		UserEntity ue = new UserEntity();
@@ -77,6 +83,7 @@ public class UserDAOImpl implements UserDAO {
 		return pl;
 	}
 
+	
 	@Override
 	public List<Post> getDownvotedPosts(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);
@@ -97,6 +104,7 @@ public class UserDAOImpl implements UserDAO {
 		return pl;
 	}
 
+	
 	@Override
 	public List<Post> getSavedPosts(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);
@@ -115,24 +123,27 @@ public class UserDAOImpl implements UserDAO {
 		return pl;
 	}
 
+	
 	@Override
 	public Boolean usernameExists(String username) {
 		Query q = em.createQuery("Select u from UserEntity u where u.username = :username");
 		q.setParameter("username", username);
-		UserEntity ue = (UserEntity) q.getSingleResult();
-		if (ue != null) return true;
+		List<UserEntity> uel = q.getResultList();
+		if (!uel.isEmpty()) return true;
 		return false;
 	}
 
+	
 	@Override
 	public Boolean emailExists(String email) {
 		Query q = em.createQuery("Select u from UserEntity u where u.email = :email");
 		q.setParameter("email", email);
-		UserEntity ue = (UserEntity) q.getSingleResult();
-		if (ue != null) return true;
+		List<UserEntity> uel = q.getResultList();
+		if (!uel.isEmpty()) return true;
 		return false;
 	}
 
+	
 	@Override
 	public List<Post> getPosts(Integer uid) {
 		Query q = em.createQuery("Select p from PostEntity p where p.useruid = :uid");
@@ -151,7 +162,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return pl;
 	}
-
+	
 	@Override
 	public Boolean upvotePost(Integer uid, Integer pid) {
 		PostEntity pe = em.find(PostEntity.class, pid);
@@ -165,6 +176,7 @@ public class UserDAOImpl implements UserDAO {
 		return true;
 	}
 
+	
 	@Override
 	public Boolean downvotePost(Integer uid, Integer pid) {
 		PostEntity pe = em.find(PostEntity.class, pid);
@@ -178,6 +190,7 @@ public class UserDAOImpl implements UserDAO {
 		return true;
 	}
 
+	
 	@Override
 	public Boolean savePost(Integer uid, Integer pid) {
 		PostEntity pe = em.find(PostEntity.class, pid);

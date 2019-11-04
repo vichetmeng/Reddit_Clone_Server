@@ -20,8 +20,6 @@ public class PostEntity {
 	private String content;
 	private String title;
 	private Integer upvoteCount;
-	private Integer useruid;
-	private Integer topicid;
 	private Integer downvoteCount;
 	private String pictureUrl;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -86,21 +84,8 @@ public class PostEntity {
 	public TopicEntity getTopic() {
 		return topic;
 	}
-	
-	public Integer getUseruid() {
-		return useruid;
-	}
-	public void setUseruid(Integer useruid) {
-		this.useruid = useruid;
-	}
-	public Integer getTopicid() {
-		return topicid;
-	}
 	public void setTopic(TopicEntity topic) {
 		this.topic = topic;
-	}	
-	public void setTopicid(Integer topicid) {
-		this.topicid = topicid;
 	}
 	
 	
