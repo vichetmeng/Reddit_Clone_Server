@@ -49,7 +49,7 @@ CREATE TABLE Post (
   Content        text NOT NULL, 
   TopicId        int(10) NOT NULL, 
   UserUId        int(10), 
-  picture_url    varchar(255) NOT NULL, 
+  picture_url    varchar(255), 
   Upvote_Count   int(10) DEFAULT 0 NOT NULL, 
   Downvote_Count int(10) DEFAULT 0 NOT NULL, 
   Date_Created   datetime NOT NULL, 
@@ -138,6 +138,8 @@ INSERT INTO post(title,content,topicid, useruid, date_created) values("UCI post 
 INSERT INTO post(title,content,topicid, useruid, date_created) values("UCI post title 2", "UCI post content 1 posted by khang", 2, 4, CURDATE());
 INSERT INTO post(title,content,topicid, useruid, date_created) values("Nature post title 3", "Nature post content 1 posted by john", 3, 2, CURDATE());
 INSERT INTO post(title,content,topicid, useruid, date_created) values("Programming post title 4", "Programming post content 1 posted by vichet", 3, 1, CURDATE());
+
+
 
 
 select * from user;
