@@ -134,5 +134,11 @@ public class TopicDAOImpl implements TopicDAO {
 		return null;
 	}
 
+	@Override
+	public List<User> getMonitorsInTopic(Integer topicId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

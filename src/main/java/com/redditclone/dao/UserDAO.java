@@ -88,6 +88,16 @@ public interface UserDAO {
 	 * @return true if it successfully saved the post, false otherwise (couldn't found the post or user).
 	 */
 	public Boolean savePost(Integer uid, Integer pid);
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public Boolean updateUser(User user);
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 */
 	public Boolean deleteUser(Integer uid);
 }

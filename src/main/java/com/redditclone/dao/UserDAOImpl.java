@@ -18,8 +18,8 @@ import com.redditclone.model.User;
 import com.redditclone.utility.HashingUtility;
 
 /**
+ * 
  * @author vichetmeng
- *
  */
 @Repository
 @Transactional
@@ -199,5 +199,19 @@ public class UserDAOImpl implements UserDAO {
 		if (pe == null || ue == null) return false;
 		ue.getPostsSaved().add(pe);
 		return true;
+	}
+	
+
+	@Override
+	public Boolean updateUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// VICHET HERE
+	@Override
+	public Boolean deleteUser(Integer uid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -31,7 +31,8 @@ public interface TopicDAO {
 	 * @param topicId the id of the topic
 	 * @return list of User objects, null if the topic doesn't exist
 	 */
-	public List<User> getMembersInTopic(Integer topicId);
+	public List<User> getMembersInTopic(Integer topicId); 
+	public List<User> getMonitorsInTopic(Integer topicId);
 	/**
 	 * Updates the topic details
 	 * @param t the topic object
