@@ -7,16 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import com.redditclone.dao.TopicDAO;
-import com.redditclone.dao.UserDAO;
-import com.redditclone.model.User;
 import com.redditclone.service.UserService;
 
 @SpringBootApplication
-@PropertySource(value= {"classpath:messages.properties"})
+//@PropertySource(value= {"classpath:messages.properties"})
 public class SpringStarter implements CommandLineRunner {
-	@Autowired
-	UserService userService;
+//	@Autowired
+//	UserService userService;
 	@Autowired
 	Environment env;
 
@@ -40,27 +37,27 @@ public class SpringStarter implements CommandLineRunner {
 //			}
 //		}
 		// Register a user
-		try {
-			User u = new User();
-			u.setEmail("vichet@infosys.com");
-			u.setUsername("vichetm");
-			u.setPassword("vichet123");
-			userService.register(u);
-		} catch (Exception e) {
-			System.out.println(env.getProperty(e.getMessage()));
-		}
-		
-//
-		
-		try {
-			User u1 = new User();
-			u1.setEmail("khang@infosys.com");
-			u1.setUsername("khang");
-			u1.setPassword("khang123");
-			userService.register(u1);
-		} catch (Exception e) {
-			System.out.println(env.getProperty(e.getMessage()));
-		}
+//		try {
+//			User u = new User();
+//			u.setEmail("vichet@infosys.com");
+//			u.setUsername("vichetm");
+//			u.setPassword("vichet123");
+//			userService.register(u);
+//		} catch (Exception e) {
+//			System.out.println(env.getProperty(e.getMessage()));
+//		}
+//		
+////
+//		
+//		try {
+//			User u1 = new User();
+//			u1.setEmail("khang@infosys.com");
+//			u1.setUsername("khang");
+//			u1.setPassword("khang123");
+//			userService.register(u1);
+//		} catch (Exception e) {
+//			System.out.println(env.getProperty(e.getMessage()));
+//		}
 //
 //		User u2 = new User();
 //		u2.setEmail("roden@infosys.com");
