@@ -200,4 +200,19 @@ public class UserDAOImpl implements UserDAO {
 		ue.getPostsSaved().add(pe);
 		return true;
 	}
+
+
+
+	@Override
+	public Boolean updateUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Boolean deleteUser(Integer uid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
