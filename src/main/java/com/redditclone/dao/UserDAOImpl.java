@@ -200,12 +200,6 @@ public class UserDAOImpl implements UserDAO {
 		ue.getPostsSaved().add(pe);
 		return true;
 	}
-<<<<<<< HEAD
-
-
-=======
-	
->>>>>>> e9c08414163fa10291f30f408327831454b89084
 
 	@Override
 	public Boolean updateUser(User user) {
@@ -213,11 +207,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-<<<<<<< HEAD
 
-=======
-	// VICHET HERE
->>>>>>> e9c08414163fa10291f30f408327831454b89084
 	@Override
 	public Boolean deleteUser(Integer uid) {
 		// TODO Auto-generated method stub
