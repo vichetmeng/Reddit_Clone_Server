@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Boolean updateUser(User user) {
+	public Boolean updateUser(User user) throws Exception {
 		return userDAO.updateUser(user);
 	}
 

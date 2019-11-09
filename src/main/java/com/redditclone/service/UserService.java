@@ -66,6 +66,7 @@ public interface UserService {
 	 * 
 	 * @param user
 	 * @return
+	 * @throws Exception 
 	 */
-	public Boolean updateUser(User user);
+	public Boolean updateUser(User user) throws Exception;
 }
