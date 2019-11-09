@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 import com.redditclone.service.UserService;
 
 @SpringBootApplication
-//@PropertySource(value= {"classpath:messages.properties"})
+@PropertySource(value= {"classpath:messages.properties"})
 public class SpringStarter implements CommandLineRunner {
 //	@Autowired
 //	UserService userService;
@@ -23,7 +23,6 @@ public class SpringStarter implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("************************* RUN CALLED *************************");
 //		User u = userDAO.getAllUsers("vichetmeng");
 //		if (u != null) {
 //			System.out.println("Username: " + u.getUsername());

@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.redditclone.entity.CommentEntity;
 import com.redditclone.entity.PostEntity;
 import com.redditclone.entity.UserEntity;
 import com.redditclone.model.Post;
@@ -29,7 +30,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUser(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);
-		if (ue == null) return null;
+		if (ue == null)
+			return null;
 		User u = new User();
 		u.setUsername(ue.getUsername());
 		u.setEmail(ue.getEmail());
@@ -38,19 +40,19 @@ public class UserDAOImpl implements UserDAO {
 		u.setAvatarUrl(ue.getAvatarUrl());
 		return u;
 	}
- 
-	
+
 	@Override
 	public Integer login(String username, String password) {
 		Query q = em.createQuery("Select u from UserEntity u where u.username = :username");
 		q.setParameter("username", username);
 		List<UserEntity> uel = q.getResultList();
-		if (uel.isEmpty()) return null;
-		if (uel.get(0).getPasswordHash().equals(HashingUtility.getHashValue(password))) return uel.get(0).getUid();
+		if (uel.isEmpty())
+			return null;
+		if (uel.get(0).getPasswordHash().equals(HashingUtility.getHashValue(password)))
+			return uel.get(0).getUid();
 		return null;
 	}
 
-	
 	@Override
 	public Integer register(User user) {
 		UserEntity ue = new UserEntity();
@@ -62,11 +64,12 @@ public class UserDAOImpl implements UserDAO {
 		em.persist(ue);
 		return ue.getUid();
 	}
-	
+
 	@Override
 	public List<Post> getUpvotedPosts(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);
-		if(ue == null) return null;
+		if (ue == null)
+			return null;
 		List<PostEntity> pel = ue.getPostsUpvoted();
 		List<Post> pl = new ArrayList<>();
 		for (PostEntity pe : pel) {
@@ -83,11 +86,11 @@ public class UserDAOImpl implements UserDAO {
 		return pl;
 	}
 
-	
 	@Override
 	public List<Post> getDownvotedPosts(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);
-		if(ue == null) return null;
+		if (ue == null)
+			return null;
 		List<PostEntity> pel = ue.getPostsDownvoted();
 		List<Post> pl = new ArrayList<>();
 		for (PostEntity pe : pel) {
@@ -104,7 +107,6 @@ public class UserDAOImpl implements UserDAO {
 		return pl;
 	}
 
-	
 	@Override
 	public List<Post> getSavedPosts(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);
@@ -123,30 +125,29 @@ public class UserDAOImpl implements UserDAO {
 		return pl;
 	}
 
-	
 	@Override
 	public Boolean usernameExists(String username) {
 		Query q = em.createQuery("Select u from UserEntity u where u.username = :username");
 		q.setParameter("username", username);
 		List<UserEntity> uel = q.getResultList();
-		if (!uel.isEmpty()) return true;
+		if (!uel.isEmpty())
+			return true;
 		return false;
 	}
 
-	
 	@Override
 	public Boolean emailExists(String email) {
 		Query q = em.createQuery("Select u from UserEntity u where u.email = :email");
 		q.setParameter("email", email);
 		List<UserEntity> uel = q.getResultList();
-		if (!uel.isEmpty()) return true;
+		if (!uel.isEmpty())
+			return true;
 		return false;
 	}
 
-	
 	@Override
 	public List<Post> getPosts(Integer uid) {
-		Query q = em.createQuery("Select p from PostEntity p where p.useruid = :uid");
+		Query q = em.createQuery("Select p from PostEntity p where p.user.uid = :uid");
 		q.setParameter("uid", uid);
 		List<PostEntity> pel = q.getResultList();
 		List<Post> pl = new ArrayList<>();
@@ -162,41 +163,42 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return pl;
 	}
-	
+
 	@Override
 	public Boolean upvotePost(Integer uid, Integer pid) {
 		PostEntity pe = em.find(PostEntity.class, pid);
 		UserEntity ue = em.find(UserEntity.class, uid);
-		
+
 		// Add the post entity into the ue's upvotedpost
 		// increment the post's upvote count by 1
-		if (pe == null || ue == null) return false;
+		if (pe == null || ue == null)
+			return false;
 		ue.getPostsUpvoted().add(pe);
-		pe.setUpvoteCount(pe.getUpvoteCount()+1);
+		pe.setUpvoteCount(pe.getUpvoteCount() + 1);
 		return true;
 	}
 
-	
 	@Override
 	public Boolean downvotePost(Integer uid, Integer pid) {
 		PostEntity pe = em.find(PostEntity.class, pid);
 		UserEntity ue = em.find(UserEntity.class, uid);
-		
+
 		// Add the post entity into the ue's downvotepost
 		// increment the post's downvote count by 1
-		if (pe == null || ue == null) return false;
+		if (pe == null || ue == null)
+			return false;
 		ue.getPostsDownvoted().add(pe);
-		pe.setDownvoteCount(pe.getDownvoteCount()+1);
+		pe.setDownvoteCount(pe.getDownvoteCount() + 1);
 		return true;
 	}
 
-	
 	@Override
 	public Boolean savePost(Integer uid, Integer pid) {
 		PostEntity pe = em.find(PostEntity.class, pid);
 		UserEntity ue = em.find(UserEntity.class, uid);
-		
-		if (pe == null || ue == null) return false;
+
+		if (pe == null || ue == null)
+			return false;
 		ue.getPostsSaved().add(pe);
 		return true;
 	}
@@ -217,7 +219,26 @@ public class UserDAOImpl implements UserDAO {
 	// Vichet Meng
 	@Override
 	public Boolean deleteUser(Integer uid) {
-		// TODO Auto-generated method stub
-		return null;
+		UserEntity ue = em.find(UserEntity.class, uid);
+		if (ue == null) return false;
+		// Find the list of comments made by this user, and set all the user entity
+		// inside those comments to null
+		Query q1 = em.createQuery("select c from CommentEntity c where c.user.uid = :uid");
+		q1.setParameter("uid", uid);
+		List<CommentEntity> cel = q1.getResultList();
+		for (CommentEntity ce : cel) {
+			ce.setUser(null);
+		}
+
+		// Find the list of posts made by this user, and set all the user entity
+		// inside those posts to null
+		Query q2 = em.createQuery("select p from PostEntity p where p.user.uid = :uid");
+		q2.setParameter("uid", uid);
+		List<PostEntity> pel = q2.getResultList();
+		for (PostEntity pe : pel) {
+			pe.setUser(null);
+		}
+		em.remove(ue);
+		return true;
 	}
 }
