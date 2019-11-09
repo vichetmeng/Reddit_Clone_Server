@@ -209,7 +209,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	// VICHET HERE
+
 	@Override
 	public Boolean deleteUser(Integer uid) {
 		UserEntity ue = em.find(UserEntity.class, uid);

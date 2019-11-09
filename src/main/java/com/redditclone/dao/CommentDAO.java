@@ -19,9 +19,13 @@ public interface CommentDAO {
 	 */
 	public Boolean updateComment(Comment comment) throws Exception;
 	/**
-	 * Create a comment
-	 * @param a post id, the user id, the comment id of its parent comment, and the comment object
-	 * @return the comment id of the comment that is created
+	 * 
+	 * @param pid
+	 * @param uid
+	 * @param parentid
+	 * @param comment
+	 * @return
+	 * @throws Exception
 	 */
 	public Integer createComment(Integer pid, Integer uid, Integer parentid, Comment comment) throws Exception;
 	/**
