@@ -135,8 +135,19 @@ public class TopicDAOImpl implements TopicDAO {
 
 	@Override
 	public List<User> getMonitorsInTopic(Integer topicId) {
-		// TODO Auto-generated method stub
-		return null;
+		TopicEntity te = em.find(TopicEntity.class, topicId);
+		List<User> ul = new ArrayList<>();
+		if (te == null) return ul;
+		List<UserEntity> uel = te.getMonitorList();
+		for (UserEntity ue : uel) {
+			User u = new User();
+			u.setUid(ue.getUid());
+			u.setUsername(ue.getUsername());
+			u.setEmail(ue.getEmail());
+			u.setAvatarUrl(ue.getAvatarUrl());
+			ul.add(u);
+		}
+		return ul;
 	}
 
 

@@ -37,12 +37,11 @@ public class UserEntity {
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_save",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="postpid"))
 	private List<PostEntity> postsSaved;
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="subredditmember",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="topicid"))
-	private List<TopicEntity> memberList;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="subredditmonitor",joinColumns=@JoinColumn(name="useruid"),inverseJoinColumns=@JoinColumn(name="topicid"))
-	private List<TopicEntity> monitorList;
+	
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy = "memberList")
+	private List<TopicEntity> memberTopicList;
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "monitorList")
+	private List<TopicEntity> monitorTopicList;
 	
 	private LocalDateTime dateJoined;
 	
@@ -111,19 +110,19 @@ public class UserEntity {
 	}
 
 	public List<TopicEntity> getMemberList() {
-		return memberList;
+		return memberTopicList;
 	}
 
 	public void setMemberList(List<TopicEntity> memberList) {
-		this.memberList = memberList;
+		this.memberTopicList = memberList;
 	}
 
 	public List<TopicEntity> getMonitorList() {
-		return monitorList;
+		return monitorTopicList;
 	}
 
 	public void setMonitorList(List<TopicEntity> monitorList) {
-		this.monitorList = monitorList;
+		this.monitorTopicList = monitorList;
 	}
 	
 }
