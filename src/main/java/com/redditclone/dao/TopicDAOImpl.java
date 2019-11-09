@@ -19,24 +19,25 @@ import com.redditclone.model.Topic;
 import com.redditclone.model.User;
 
 @Repository
-@Transactional
 public class TopicDAOImpl implements TopicDAO {
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
 	public Integer createTopic(Topic topic, Integer uid) {
-//		TopicEntity te = new TopicEntity();
-//		te.setDateCreated(LocalDateTime.now());
-//		te.setName(topic.getName());
-//		te.setRules(topic.getRules());
-//		te.setDescription(topic.getDescription());
-//		UserEntity ue = em.find(UserEntity.class, uid);
-//		te.getMemberList().add(ue);
-//		te.getMonitorList().add(ue);
-//		em.persist(te);
-//		return te.getTid();
-		return null;
+		TopicEntity te = new TopicEntity();
+		te.setDateCreated(LocalDateTime.now());
+		te.setName(topic.getName());
+		te.setRules(topic.getRules());
+		te.setDescription(topic.getDescription());
+		UserEntity ue = em.find(UserEntity.class, uid);
+		List<UserEntity> memList = new ArrayList<UserEntity>();
+		List<UserEntity> monList = new ArrayList<UserEntity>();
+		monList.add(ue);
+		te.setMemberList(memList);
+		te.setMonitorList(monList);
+		em.persist(te);
+		return te.getTid();
 	}
 
 	@Override
@@ -89,32 +90,30 @@ public class TopicDAOImpl implements TopicDAO {
 	@Override
 	public List<User> getMembersInTopic(Integer topicId) {
 //		"select u from UserEntity u where u."
-//		TopicEntity te = em.find(TopicEntity.class, topicId);
-//		List<User> ul = new ArrayList<>();
-//		if (te == null) return ul;
-//		List<UserEntity> uel = te.getMemberList();
-//		for (UserEntity ue : uel) {
-//			User u = new User();
-//			u.setUid(ue.getUid());
-//			u.setUsername(ue.getUsername());
-//			u.setEmail(ue.getEmail());
-//			u.setAvatarUrl(ue.getAvatarUrl());
-//			ul.add(u);
-//		}
-//		return ul;
-		return null;
+		TopicEntity te = em.find(TopicEntity.class, topicId);
+		List<User> ul = new ArrayList<>();
+		if (te == null) return ul;
+		List<UserEntity> uel = te.getMemberList();
+		for (UserEntity ue : uel) {
+			User u = new User();
+			u.setUid(ue.getUid());
+			u.setUsername(ue.getUsername());
+			u.setEmail(ue.getEmail());
+			u.setAvatarUrl(ue.getAvatarUrl());
+			ul.add(u);
+		}
+		return ul;
 	}
 
 	@Override
 	public Boolean userIsMember(Integer topicId, Integer uid) {
-//		TopicEntity te = em.find(TopicEntity.class, topicId);
-//		if (te == null) return null;
-//		List<UserEntity> uel = te.getMemberList();
-//		for (UserEntity ue : uel) {
-//			if (ue.getUid().equals(uid)) return true;
-//		}
-//		return false;
-		return null;
+		TopicEntity te = em.find(TopicEntity.class, topicId);
+		if (te == null) return null;
+		List<UserEntity> uel = te.getMemberList();
+		for (UserEntity ue : uel) {
+			if (ue.getUid().equals(uid)) return true;
+		}
+		return false;
 	}
 
 	@Override

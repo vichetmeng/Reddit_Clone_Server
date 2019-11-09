@@ -22,7 +22,6 @@ import com.redditclone.utility.HashingUtility;
  * @author vichetmeng
  */
 @Repository
-@Transactional
 public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
 	EntityManager em;
@@ -59,6 +58,7 @@ public class UserDAOImpl implements UserDAO {
 		ue.setPasswordHash(HashingUtility.getHashValue(user.getPassword()));
 		ue.setDateJoined(LocalDateTime.now());
 		ue.setEmail(user.getEmail());
+		ue.setAvatarUrl(user.getAvatarUrl());
 		em.persist(ue);
 		return ue.getUid();
 	}
@@ -201,13 +201,20 @@ public class UserDAOImpl implements UserDAO {
 		return true;
 	}
 
+	
 	@Override
-	public Boolean updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean updateUser(User user) throws Exception {
+		UserEntity ue = em.find(UserEntity.class, user.getUid());
+		if (ue == null) throw new Exception("Invalid User"); 
+		ue.setUsername(user.getUsername());
+		ue.setPasswordHash(HashingUtility.getHashValue(user.getPassword()));
+		ue.setEmail(user.getEmail());
+		ue.setAvatarUrl(user.getAvatarUrl());
+		em.persist(ue);
+		return true;
 	}
 
-
+	// Vichet Meng
 	@Override
 	public Boolean deleteUser(Integer uid) {
 		// TODO Auto-generated method stub

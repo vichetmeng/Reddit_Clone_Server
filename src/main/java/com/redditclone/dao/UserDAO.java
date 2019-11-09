@@ -89,11 +89,12 @@ public interface UserDAO {
 	 */
 	public Boolean savePost(Integer uid, Integer pid);
 	/**
-	 * 
-	 * @param user
-	 * @return
+	 * This function allows the user to edit their email, password and avatar 
+	 * @param user User model that gets from the front end 
+	 * @return Boolean true if the operation is success  
+	 * @throws Exception if we can't find the user  
 	 */
-	public Boolean updateUser(User user);
+	public Boolean updateUser(User user) throws Exception;
 	/**
 	 * 
 	 * @param uid

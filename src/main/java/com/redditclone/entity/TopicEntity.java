@@ -36,10 +36,10 @@ public class TopicEntity {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="subredditmember",joinColumns=@JoinColumn(name="topicid"),
 	inverseJoinColumns=@JoinColumn(name="useruid"))
-	private List<TopicEntity> memberList;
+	private List<UserEntity> memberList;
 	
 	private LocalDateTime dateCreated;
-	
+
 	public Integer getTid() {
 		return tid;
 	}
@@ -71,6 +71,7 @@ public class TopicEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public List<UserEntity> getUserBlacklist() {
 		return userBlacklist;
 	}
@@ -78,7 +79,6 @@ public class TopicEntity {
 	public void setUserBlacklist(List<UserEntity> userBlacklist) {
 		this.userBlacklist = userBlacklist;
 	}
-
 
 	public List<UserEntity> getMonitorList() {
 		return monitorList;
@@ -88,6 +88,14 @@ public class TopicEntity {
 		this.monitorList = monitorList;
 	}
 
+	public List<UserEntity> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<UserEntity> memberList) {
+		this.memberList = memberList;
+	}
+
 	public LocalDateTime getDateCreated() {
 		return dateCreated;
 	}
@@ -95,13 +103,4 @@ public class TopicEntity {
 	public void setDateCreated(LocalDateTime dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-
-	public List<TopicEntity> getMemberList() {
-		return memberList;
-	}
-
-	public void setMemberList(List<TopicEntity> memberList) {
-		this.memberList = memberList;
-	} 
-	
 }
