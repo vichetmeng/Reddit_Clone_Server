@@ -5,6 +5,7 @@ import java.util.List;
 import com.redditclone.model.Post;
 import com.redditclone.model.User;
 
+
 public interface UserService {
 	/**
 	 * 
@@ -12,7 +13,7 @@ public interface UserService {
 	 * @return
 	 */
 	public Integer register(User u) throws Exception;
-	public Boolean login(String username, String password);
+	public Boolean login(String username, String password) throws Exception;
 	public Boolean deleteUser(Integer uid);
 	/**
 	 * This function finds all the post upvoted by the user

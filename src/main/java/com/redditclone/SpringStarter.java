@@ -23,7 +23,6 @@ public class SpringStarter implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("************************* RUN CALLED *************************");
 //		User u = userDAO.getAllUsers("vichetmeng");
 //		if (u != null) {
 //			System.out.println("Username: " + u.getUsername());

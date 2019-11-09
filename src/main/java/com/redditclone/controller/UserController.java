@@ -1,8 +1,10 @@
 package com.redditclone.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +25,15 @@ public class UserController {
 	
 	@RequestMapping(value="/getposts/{uid}",method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> getPosts(@PathVariable Integer uid) {
-		return null;
+		List<Post> list = userService.getPosts(uid);
+		if (list == null || list.isEmpty())
+			return new ResponseEntity<List<Post>>(list, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Post>>(list, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/getposts/{uid}",method = RequestMethod.GET)
+	@RequestMapping(value="/getupvotedposts/{uid}",method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> getUpvotedPosts(@PathVariable Integer uid) {
-		return null;
+		return new ResponseEntity<List<Post>>(new ArrayList<Post>(), HttpStatus.OK);
 	}
 	@RequestMapping(value="/register",method = RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody User u) throws Exception{
