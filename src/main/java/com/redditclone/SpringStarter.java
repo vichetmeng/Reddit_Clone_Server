@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 import com.redditclone.service.UserService;
 
 @SpringBootApplication
-//@PropertySource(value= {"classpath:messages.properties"})
+@PropertySource(value= {"classpath:messages.properties"})
 public class SpringStarter implements CommandLineRunner {
 //	@Autowired
 //	UserService userService;
